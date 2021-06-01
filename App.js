@@ -1,6 +1,6 @@
-import 'react-native-gesture-handler'
+import 'react-native-gesture-handler';
 import React from 'react';
-import { AntDesign, MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import About from './pages/About';
 import InGame from './pages/InGame';
 import Home from './pages/Home';
@@ -8,10 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-global.user = false;
-
 const Stack = createStackNavigator();
-
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
@@ -19,14 +16,9 @@ function HomeScreen() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
           if (route.name === 'Home') {
             color = focused ? 'red' : 'gray'
             return <AntDesign name={"home"} size={size} color={color} />;
-          } else if (route.name === 'Profile') {
-            color = focused ? 'blue' : 'gray'
-            return <AntDesign name={"profile"} size={size} color={color} />;
           } else if (route.name === 'About') {
             color = focused ? 'orange' : 'gray'
             return <FontAwesome name={"hand-stop-o"} size={size} color={color} />;
