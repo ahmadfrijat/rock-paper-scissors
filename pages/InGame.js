@@ -71,7 +71,7 @@ export default function InGame() {
       <View style={styles.botView}>
         <BotView image={opponentMove}></BotView>
       </View>
-      <Text style={{fontSize:30}}>_________________{'\n'}</Text>
+      <Text style={{ fontSize: 30 }}>_________________{'\n'}</Text>
       <View>
         <Text style={styles.playerStats}>You</Text>
         <Text style={styles.playerStats}>Score: {score.yourScore}</Text>
@@ -126,11 +126,11 @@ const PlayerView = (prop) => {
 };
 
 const BotView = (prop) => {
-  return (
-    <View>
-      <Image source={prop.image} style={styles.opponentMove} />
-    </View>
-  );
+    return (
+      <View>
+        {(prop.image)?<Image source={prop.image} style={styles.opponentMove} />: null}
+      </View>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   },
   attack: {
     padding: 15,
-    width:150,
+    width: 150,
     textAlign: 'center',
     fontSize: 25,
     fontWeight: '600',
