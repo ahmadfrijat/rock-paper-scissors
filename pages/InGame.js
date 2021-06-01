@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { Pages } from 'react-native-pages';
 
 export default function InGame() {
-    const [score, setScore] = useState({yourScore: 0, opponentScore: 0});
+    const [score, setScore] = useState({ yourScore: 0, opponentScore: 0 });
     const [opponentMove, setopponentMove] = useState('');
     const [yourMove, setyourMove] = useState(0);
     const makeMove = () => {
@@ -12,79 +12,77 @@ export default function InGame() {
             case 0: // Paper
                 setopponentMove(require('./../assets/paper.png'))
                 if (yourMove == 2) {
-                    setScore({yourScore: score.yourScore + 1, opponentScore: score.opponentScore})
+                    setScore({ yourScore: score.yourScore + 1, opponentScore: score.opponentScore })
                 }
                 else if (yourMove == 1) {
-                    setScore({yourScore: score.yourScore, opponentScore: score.opponentScore + 1})
+                    setScore({ yourScore: score.yourScore, opponentScore: score.opponentScore + 1 })
                 }
                 break;
             case 1: // Rock
                 setopponentMove(require('./../assets/rock.png'))
                 if (yourMove == 0) {
-                    setScore({yourScore: score.yourScore + 1, opponentScore: score.opponentScore})
+                    setScore({ yourScore: score.yourScore + 1, opponentScore: score.opponentScore })
                 }
                 else if (yourMove == 2) {
-                    setScore({yourScore: score.yourScore, opponentScore: score.opponentScore + 1})
+                    setScore({ yourScore: score.yourScore, opponentScore: score.opponentScore + 1 })
                 }
                 break;
             case 2: // Scissors
                 setopponentMove(require('./../assets/scissor.png'))
                 if (yourMove == 1) {
-                    setScore({yourScore: score.yourScore + 1, opponentScore: score.opponentScore})
+                    setScore({ yourScore: score.yourScore + 1, opponentScore: score.opponentScore })
                 }
                 else if (yourMove == 0) {
-                    setScore({yourScore: score.yourScore, opponentScore: score.opponentScore + 1})
+                    setScore({ yourScore: score.yourScore, opponentScore: score.opponentScore + 1 })
                 }
                 break;
-        }    
+        }
     }
     return (
         <SafeAreaView style={styles.container}>
             <View>
-                <Text style={styles.playerStats}>Bot {score.opponentScore}</Text> 
+                <Text style={styles.playerStats}>Bot {score.opponentScore}</Text>
             </View>
             <View style={styles.botView}>
                 <BotView top={0} image={opponentMove}></BotView>
             </View>
-            <View style={{borderBottomColor: 'black', borderBottomWidth: 10}}/>
+            <View style={{ borderBottomColor: 'black', borderBottomWidth: 10 }} />
             <View style={styles.playerView}>
                 <PlayerView score={score.yourScore} move={makeMove} selectMove={setyourMove}></PlayerView>
             </View>
             <View>
-                <Text style={styles.playerStats}>You {score.yourScore}</Text> 
+                <Text style={styles.playerStats}>You {score.yourScore}</Text>
             </View>
         </SafeAreaView>
     )
 }
 
-const PlayerView = (prop) =>{
+const PlayerView = (prop) => {
     return (
+        <View>
+            <Pages indicatorColor="rgb(0, 0, 0)" onScrollEnd={(index) => {
+                prop.selectMove(index)
+            }}>
+                <Image source={require('./../assets/paper.png')} style={styles.playerMove} />
+                <Image source={require('./../assets/rock.png')} style={styles.playerMove} />
+                <Image source={require('./../assets/scissor.png')} style={styles.playerMove} />
+            </Pages>
             <View>
-                <Pages indicatorColor="rgb(0, 0, 0)" onScrollEnd={(index) => {
-                    prop.selectMove(index)
+                <Pressable onPress={() => {
+                    prop.move()
                 }}>
-                    <Image source={require('./../assets/paper.png')} style={styles.playerMove}/>
-                    <Image source={require('./../assets/rock.png')} style={styles.playerMove}/>
-                    <Image source={require('./../assets/scissor.png')} style={styles.playerMove}/>
-                </Pages>
-                <View>
-                    <Pressable onPress={() => {
-                        prop.move()
-                    }}> 
-                        <Text style={styles.attack}>ATTACK!</Text>
-                    </Pressable>
-                </View>
-                {/* <Text style={styles.playerStats}>{prop.name}  {prop.score}</Text> */}
-                
+                    <Text style={styles.attack}>ATTACK!</Text>
+                </Pressable>
             </View>
+
+        </View>
     )
 }
 
-const BotView = (prop) =>{
+const BotView = (prop) => {
     return (
         <View>
-            {/* <Text style={styles.title}>{prop.name}   {prop.score}</Text> */}
-            <Image source={prop.image} style={styles.opponentMove}/> 
+            <Image source={prop.image} style={styles.opponentMove} />
         </View>
     )
 }
@@ -101,10 +99,8 @@ const styles = StyleSheet.create({
         height: 130,
         width: 150,
         margin: 10,
-        //resizeMode: 'contain',
-        //padding: 10,
-        //textAlign: "center",
-    },  
+
+    },
     playerMove: {
         resizeMode: "contain",
         height: "100%",
@@ -118,8 +114,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: "center",
         fontVariant: ["proportional-nums"],
-        // textAlignVertical: 'bottom'
-    },  
+
+    },
     score: {
         fontSize: 24,
         fontWeight: 'bold',
@@ -128,11 +124,11 @@ const styles = StyleSheet.create({
     },
     playerView: {
         flex: 1,
-        // borderWidth: 1,
+
     },
     botView: {
         flex: 1,
-        // borderWidth: 1,
+
     },
     container: {
         flex: 1,
@@ -150,8 +146,8 @@ const styles = StyleSheet.create({
         borderRadius: 14,
         borderColor: 'black',
         borderWidth: 2,
-        backgroundColor:'red',
+        backgroundColor: 'red',
         overflow: 'hidden',
-        alignSelf:'center'
+        alignSelf: 'center'
     }
 });
