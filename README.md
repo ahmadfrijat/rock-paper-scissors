@@ -15,7 +15,8 @@ Afnan Damra - Ahmad Alfrijat - Zaid Alasfar
 
 the game starting point, note that the sign in option isn't available yet, wait for it in version 2 :)
 
-![Home page](assets/screenshots/1.jpeg)
+<img src="assets/screenshots/1.jpeg" height="100"/>
+<!-- ![Home page](assets/screenshots/1.jpeg) -->
 
 2. **About:**
 
