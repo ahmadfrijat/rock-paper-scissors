@@ -1,214 +1,132 @@
-import React, { useState, useEffect } from 'react';
-import { ImageBackground, StyleSheet, Text, View, Pressable, Image, SafeAreaView, ScrollView, Alert } from 'react-native';
-import { Navigation } from 'react-native-navigation';
-import About from './About'
-import { NavigationContainer } from '@react-navigation/native';
-
+import React, { useState } from 'react';
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  SafeAreaView,
+} from 'react-native';
+import { FontAwesome, FontAwesome5, AntDesign } from '@expo/vector-icons';
 
 export default function Home({ navigation }) {
+  const [play, setPlay] = useState(false);
 
-    const [play, setPlay] = useState(false);
-    const [refreshPage, setRefreshPage] = useState("");
+  if (play) {
+    return (
+      <ImageBackground
+        source={require('./../assets/ROCK_PAPER_SCISSORS_1920X1200.jpg')}
+        style={styles.image1}
+      >
+        <SafeAreaView style={{ alignItems: 'center' }}>
+          {/* <Text style={styles.name}>
+            {'\n'}
+            Rock Paper Scissors
+            {'\n'}
+          </Text>
+          <Text style={{ fontSize: 40 }}>👊 ✋ ✌️</Text>
+          <Text>{'\n\n'}</Text> */}
+          <Pressable
+            onPress={() => {
+              navigation.navigate('InGame');
+            }}
+            style={styles.buttonPress}
+          >
+            <Text style={styles.buttonText}>
+              with bot{'   '}
+              <FontAwesome5 name={'robot'} size={20} />
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              setPlay(false);
+            }}
+            style={styles.buttonPress}
+          >
+            <Text style={styles.buttonText}>
+              back{'   '}
+              <AntDesign name={'back'} size={20} />
+            </Text>
+          </Pressable>
+        </SafeAreaView>
+      </ImageBackground>
+    );
+  }
 
-    if (global.user) {
-
-        console.log('signed into home page')
-        // signed in
-        if (play) {
-            return (
-                <SafeAreaView style={{ alignItems: 'center' }}>
-                    <Text style={styles.name}> rock paper scissors {"\n"}{"\n"}</Text>
-                    <Pressable
-                        onPress={() => {
-                            navigation.navigate('InGame')
-                        }}
-                        style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed
-                                    ? 'rgb(210, 230, 255)'
-                                    : 'white'
-                            },
-                            styles.buttonPress
-                        ]}
-                    >
-                        <Text style={styles.buttonText}>vs bots</Text>
-                    </Pressable>
-                    <Pressable
-                        onPress={() => {
-                            navigation.navigate('InGameMulti')
-                        }}
-                        style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed
-                                    ? 'rgb(210, 230, 255)'
-                                    : 'white'
-                            },
-                            styles.buttonPress
-                        ]}
-                    >
-                        <Text style={styles.buttonText}>multi- player</Text>
-                    </Pressable>
-                    <Pressable
-                        onPress={() => {
-                            setPlay(false);
-                        }}
-                        style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed
-                                    ? 'rgb(210, 230, 255)'
-                                    : 'white'
-                            },
-                            styles.buttonPress
-                        ]}
-                    >
-                        <Text style={styles.buttonText}>back</Text>
-                    </Pressable>
-                    <View style={{ flex: 1, width: "100%" }}>
-                        <View style={{ flex: 1, width: "100%", flexDirection: 'row' }}>
-                            <Image source={require('./../assets/scissor.png')} style={{ width: "50%", resizeMode: 'contain', marginTop: 50 }} />
-                            <Image source={require('./../assets/paper.png')} style={{ width: "50%", resizeMode: 'contain', marginTop: 50 }} />
-                        </View>
-                        <Image source={require('./../assets/rock.png')} style={{ width: "70%", resizeMode: 'contain' }} />
-                    </View>
-                </SafeAreaView>
-            )
-        }
-
-        return (
-            <SafeAreaView style={{ alignItems: 'center' }}>
-                <View style={{ alignItems: 'center' }}>
-                    <Text style={styles.name}> rock paper scissors {"\n"}{"\n"}</Text>
-                    <Pressable
-                        onPress={() => {
-                            setPlay(true);
-                        }}
-                        style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed
-                                    ? 'rgb(210, 230, 255)'
-                                    : 'white'
-                            },
-                            styles.buttonPress
-                        ]}
-                    >
-                        <Text style={styles.buttonText}>play</Text>
-                    </Pressable>
-                    <View style={{ flex: 1, width: "100%" }}>
-                        <View style={{ flex: 1, width: "100%", flexDirection: 'row' }}>
-                            <Image source={require('./../assets/scissor.png')} style={{ width: "50%", resizeMode: 'contain', marginTop: 50 }} />
-                            <Image source={require('./../assets/paper.png')} style={{ width: "50%", resizeMode: 'contain', marginTop: 50 }} />
-                        </View>
-                        <Image source={require('./../assets/rock.png')} style={{ width: "70%", resizeMode: 'contain' }} />
-                    </View>
-                </View>
-            </SafeAreaView>
-        )
-    } else {
-        // signed out
-        if (play) {
-            return (
-                <SafeAreaView style={{ alignItems: 'center' }}>
-                    <Text style={styles.name}> rock paper scissors {"\n"}{"\n"}</Text>
-                    <Pressable
-                        onPress={() => {
-                            navigation.navigate('InGame')
-                        }}
-                        style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed
-                                    ? 'rgb(210, 230, 255)'
-                                    : 'white'
-                            },
-                            styles.buttonPress
-                        ]}
-                    >
-                        <Text style={styles.buttonText}>vs bots</Text>
-                    </Pressable>
-                    <Pressable
-                        onPress={() => {
-                            setPlay(false);
-                        }}
-                        style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed
-                                    ? 'rgb(210, 230, 255)'
-                                    : 'white'
-                            },
-                            styles.buttonPress
-                        ]}
-                    >
-                        <Text style={styles.buttonText}>back</Text>
-                    </Pressable>
-                    <View style={{ flex: 1, width: "100%" }}>
-                        <View style={{ flex: 1, width: "100%", flexDirection: 'row' }}>
-                            <Image source={require('./../assets/scissor.png')} style={{ width: "50%", resizeMode: 'contain', marginTop: 50 }} />
-                            <Image source={require('./../assets/paper.png')} style={{ width: "50%", resizeMode: 'contain', marginTop: 50 }} />
-                        </View>
-                        <Image source={require('./../assets/rock.png')} style={{ width: "70%", resizeMode: 'contain' }} />
-                    </View>
-                </SafeAreaView>
-            )
-        }
-
-        return (
-            <SafeAreaView style={{ alignItems: 'center' }}>
-                <View style={{ alignItems: 'center' }}>
-                    <Text style={styles.name}> rock paper scissors {"\n"}{"\n"}</Text>
-                    <Pressable
-                        onPress={() => {
-                            setPlay(true);
-                        }}
-                        style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed
-                                    ? 'rgb(210, 230, 255)'
-                                    : 'white'
-                            },
-                            styles.buttonPress
-                        ]}
-                    >
-                        <Text style={styles.buttonText}>play</Text>
-                    </Pressable>
-                    <View style={{ flex: 1, width: "100%" }}>
-                        <View style={{ flex: 1, width: "100%", flexDirection: 'row' }}>
-                            <Image source={require('./../assets/scissor.png')} style={{ width: "50%", resizeMode: 'contain', marginTop: 50 }} />
-                            <Image source={require('./../assets/paper.png')} style={{ width: "50%", resizeMode: 'contain', marginTop: 50 }} />
-                        </View>
-                        <Image source={require('./../assets/rock.png')} style={{ width: "70%", resizeMode: 'contain' }} />
-                    </View>
-                </View>
-            </SafeAreaView>
-        )
-    }
-
+  return (
+    <ImageBackground
+      source={require('./../assets/ROCK_PAPER_SCISSORS_1920X1200.jpg')}
+      style={styles.image}
+    >
+      <SafeAreaView style={{ alignItems: 'center', opacity: 1 }}>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={styles.name}>
+            {'\n'}
+            Rock Paper {'\n'}Scissors{'\n'}
+            <FontAwesome name="hand-rock-o" size={40} />
+            {'  '}
+            <FontAwesome name="hand-paper-o" size={40} />
+            {'  '}
+            <FontAwesome name="hand-scissors-o" size={40} />
+            {'\n\n\n'}
+          </Text>
+          {/* <Text style={{ fontSize: 40 }}>👊 ✋ ✌️{'\n'}</Text> */}
+          <Pressable
+            onPress={() => {
+              setPlay(true);
+            }}
+            style={styles.buttonPress}
+          >
+            <Text style={styles.buttonText}>
+              play{'   '}
+              <FontAwesome5 name={'play'} size={20} />
+            </Text>
+          </Pressable>
+          <Pressable style={styles.buttonPress}>
+            <Text style={styles.buttonText}>
+              Sign in{'   '}
+              <FontAwesome name={'sign-in'} size={20} />
+            </Text>
+          </Pressable>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
+  );
 }
 
 const styles = StyleSheet.create({
-    name: {
-        fontSize: 35,
-        top: 20,
-        fontWeight: 'bold',
-        width: "100%",
-        textAlign: 'center'
-    },
-    buttonText: {
-        fontSize: 25,
-        padding: 10,
-        textAlign: 'center'
-    },
-    buttonPress: {
-        borderRadius: 15,
-        backgroundColor: 'pink',
-        padding: 6,
-        margin: 10,
-        width: "40%"
-    },
-    scrollview: {
-        marginHorizontal: 10
-    },
-    image: {
-        flex: 1,
-        resizeMode: "cover",
-        justifyContent: "center"
-    },
+  name: {
+    fontSize: 40,
+    top: 20,
+    fontWeight: 'bold',
+    width: '100%',
+    textAlign: 'center',
+  },
+  buttonText: {
+    fontSize: 25,
+    padding: 10,
+    fontWeight: 'bold',
+    color: '#eee',
+    textAlign: 'center',
+  },
+  buttonPress: {
+    borderRadius: 15,
+    backgroundColor: 'darkred',
+    padding: 6,
+    margin: 10,
+    width: 160,
+  },
+  scrollview: {
+    marginHorizontal: 10,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    // justifyContent: 'center',
+  },
+  image1: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
 });

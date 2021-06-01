@@ -13,6 +13,7 @@ export default function InGame() {
   const [score, setScore] = useState({ yourScore: 0, opponentScore: 0 });
   const [opponentMove, setopponentMove] = useState('');
   const [yourMove, setyourMove] = useState(0);
+
   const makeMove = () => {
     var randomMove = Math.floor(Math.random() * 3);
     switch (randomMove) {
@@ -23,7 +24,7 @@ export default function InGame() {
             yourScore: score.yourScore + 1,
             opponentScore: score.opponentScore,
           });
-        } else if (yourMove == 1) {
+        } else if (yourMove == 0) {
           setScore({
             yourScore: score.yourScore,
             opponentScore: score.opponentScore + 1,
@@ -32,7 +33,7 @@ export default function InGame() {
         break;
       case 1: // Rock
         setopponentMove(require('./../assets/rock.png'));
-        if (yourMove == 0) {
+        if (yourMove == 1) {
           setScore({
             yourScore: score.yourScore + 1,
             opponentScore: score.opponentScore,
@@ -46,12 +47,12 @@ export default function InGame() {
         break;
       case 2: // Scissors
         setopponentMove(require('./../assets/scissor.png'));
-        if (yourMove == 1) {
+        if (yourMove == 0) {
           setScore({
             yourScore: score.yourScore + 1,
             opponentScore: score.opponentScore,
           });
-        } else if (yourMove == 0) {
+        } else if (yourMove == 1) {
           setScore({
             yourScore: score.yourScore,
             opponentScore: score.opponentScore + 1,
@@ -60,16 +61,21 @@ export default function InGame() {
         break;
     }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text style={styles.playerStats}>Bot</Text>
+        <Text style={styles.playerStats}>{'\n'}Bot</Text>
         <Text style={styles.playerStats}>Score: {score.opponentScore}</Text>
       </View>
       <View style={styles.botView}>
-        <BotView top={0} image={opponentMove}></BotView>
+        <BotView image={opponentMove}></BotView>
       </View>
-      <Text style={{ borderBottomColor: 'black' }}>---------{'\n'}</Text>
+      <Text style={{fontSize:30}}>_________________{'\n'}</Text>
+      <View>
+        <Text style={styles.playerStats}>You</Text>
+        <Text style={styles.playerStats}>Score: {score.yourScore}</Text>
+      </View>
       <View style={styles.playerView}>
         <PlayerView
           score={score.yourScore}
@@ -77,35 +83,35 @@ export default function InGame() {
           selectMove={setyourMove}
         ></PlayerView>
       </View>
-      <View>
-        <Text style={styles.playerStats}>You {score.yourScore}</Text>
-      </View>
     </SafeAreaView>
   );
 }
 
 const PlayerView = (prop) => {
   return (
-    <View>
-      <Pages
-        indicatorColor="rgb(0, 0, 0)"
-        onScrollEnd={(index) => {
-          prop.selectMove(index);
-        }}
-      >
-        <Image
-          source={require('./../assets/paper.png')}
-          style={styles.playerMove}
-        />
-        <Image
-          source={require('./../assets/rock.png')}
-          style={styles.playerMove}
-        />
-        <Image
-          source={require('./../assets/scissor.png')}
-          style={styles.playerMove}
-        />
-      </Pages>
+    <>
+      <View>
+        <Pages
+          indicatorColor="rgb(0, 0, 0)"
+          onScrollEnd={(index) => {
+            prop.selectMove(index);
+          }}
+        >
+          <Image
+            source={require('./../assets/rock.png')}
+            style={styles.playerMove}
+          />
+          <Image
+            source={require('./../assets/paper.png')}
+            style={styles.playerMove}
+          />
+          <Image
+            source={require('./../assets/scissor.png')}
+            style={styles.playerMove}
+          />
+        </Pages>
+      </View>
+      <Text>{'\n'}</Text>
       <View>
         <Pressable
           onPress={() => {
@@ -115,7 +121,7 @@ const PlayerView = (prop) => {
           <Text style={styles.attack}>ATTACK!</Text>
         </Pressable>
       </View>
-    </View>
+    </>
   );
 };
 
@@ -141,10 +147,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   playerMove: {
-    // backgroundColor: 'black',
     resizeMode: 'contain',
-    height: '100%',
+    height: '75%',
     width: '100%',
+    marginTop: 20,
   },
   playerStats: {
     fontSize: 32,
@@ -165,7 +171,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    flex: 1,
+    display: 'flex',
+    flex: 0.8,
     margin: 5,
     justifyContent: 'space-evenly',
     flexDirection: 'column',
@@ -174,13 +181,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   attack: {
-    padding: 10,
+    padding: 15,
+    width:150,
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 25,
+    fontWeight: '600',
     borderRadius: 14,
-    borderColor: 'black',
-    borderWidth: 2,
-    backgroundColor: 'red',
+    color: '#eee',
+    backgroundColor: 'darkred',
     overflow: 'hidden',
     alignSelf: 'center',
   },

@@ -1,42 +1,76 @@
-import React from "react";
-import { StyleSheet, Text, SafeAreaView, ScrollView } from 'react-native';
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  ImageBackground,
+} from 'react-native';
 
 export default function About(props) {
-
-    return (
-        <SafeAreaView>
-            <ScrollView style={styles.scrollView}>
-                <Text style={styles.headerText}>What is Rock Paper Scissors? {"\n"} </Text>
-                <Text style={styles.baseText}>A game based on luck and deception. </Text>
-                <Text style={styles.baseText}>It can have more than 2 players per game.</Text>
-                <Text style={styles.baseText}>Usually played out either by rounds or by elimination. {"\n\n"}</Text>
-                <Text style={styles.headerText}>How To Play ✊ ✋ ✌️:  {"\n"}</Text>
-                <Text style={styles.baseText}>Each player must pick between three items: rock, paper or scissors.</Text>
-                <Text style={styles.baseText}>If a player plays rock and the other plays paper, paper wins. And so on...</Text>
-                <Text style={styles.baseText}>The general rule is: rock beats scissors, scissors beat paper, and paper beats rock. </Text>
-            </ScrollView>
-        </SafeAreaView>
-    )
+  return (
+    <ImageBackground
+      source={require('./../assets/ROCK_PAPER_SCISSORS_1920X1200.jpg')}
+      style={styles.image}
+    >
+      <SafeAreaView>
+        <Text
+          style={{
+            textAlign: 'center',
+            fontSize: 40,
+            fontWeight: '700',
+            textDecorationLine: 'underline',
+            marginBottom: 20,
+          }}
+        >
+          About
+        </Text>
+        <ScrollView style={styles.scrollView}>
+          <Text style={styles.headerText}>
+            What is Rock Paper Scissors? {'\n'}
+          </Text>
+          <Text style={styles.baseText}>
+            A hand game based on luck and deception.{'\n'}
+            usually played between two people, in which each player
+            simultaneously forms one of three shapes with an outstretched hand.
+            {'\n'}
+            1. "rock" (👊).{'\n'}2. "paper" (✋).{'\n'}3. "scissors" (✌️).
+            {'\n\n'}
+          </Text>
+          <Text style={styles.headerText}>How To Play? {'\n'}</Text>
+          <Text style={styles.baseText}>
+            The general rule is: rock beats scissors, scissors beat paper, and
+            paper beats rock. Tie rounds doesn't count.
+          </Text>
+        </ScrollView>
+      </SafeAreaView>
+    </ImageBackground>
+  );
 }
 
 const styles = StyleSheet.create({
-    scrollView: {
-        marginHorizontal: 15,
-        marginTop: 25,
-    },
-    titleText: {
-        fontSize: 30,
-        fontWeight: "bold",
-        backgroundColor: "yellow",
-        padding: 15
-    },
-    headerText: {
-        fontSize: 30,
-        fontWeight: "bold",
-        textDecorationLine: "underline",
-        color: "darkred",
-    },
-    baseText: {
-        fontSize: 20,
-    },
+  scrollView: {
+    marginHorizontal: 15,
+    marginTop: 25,
+  },
+  titleText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    backgroundColor: 'yellow',
+    padding: 15,
+  },
+  headerText: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: 'darkred',
+  },
+  baseText: {
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
 });
