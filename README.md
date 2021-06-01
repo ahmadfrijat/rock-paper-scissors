@@ -34,10 +34,12 @@ to choose who will be your opponent, a bot or another signed in player (you gues
 Finally! you are given the famos three options to choose from, after you choose just press attack and see what your opponent chose, keep track of your score, and GOOD LUCK :tada:
 
   1. choose your move:
-    ![Choose your move](assets/screenshots/5.gif)
+    
+  ![Choose your move](assets/screenshots/5.gif)
 
   2. keep track of your score, you won this round :smiley:
-    ![win](assets/screenshots/4.jpeg)
+  
+  ![win](assets/screenshots/4.jpeg)
 
 ### Architecture
 
