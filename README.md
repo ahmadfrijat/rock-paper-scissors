@@ -58,7 +58,7 @@ if you want to clone the project make sure to follow these steps:
 1. clone the project:
 
 ```bash
-$ git clone https://github.com/svanlaug/rock-paper-scissors.git
+$ git clone https://github.com/ahmadfrijat/rock-paper-scissors.git
 ```
 
 2. navigate to the project directory.
